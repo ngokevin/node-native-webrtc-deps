@@ -1,5 +1,5 @@
 {
-  "name": "native-rtc-deps",
+  "name": "native-webrtc-deps",
   "version": "0.0.1",
   "description": "Node native WebRTC dependencies",
   "main": "index.js",
