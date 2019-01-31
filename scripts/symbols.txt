@@ -1,0 +1,12 @@
+jpeg_idct_3x3 webrtc_jpeg_idct_3x3
+jpeg_idct_5x5 webrtc_jpeg_idct_5x5
+jpeg_idct_6x6 webrtc_jpeg_idct_6x6
+jpeg_idct_7x7 webrtc_jpeg_idct_7x7
+jpeg_idct_9x9 webrtc_jpeg_idct_9x9
+jpeg_idct_10x10 webrtc_jpeg_idct_10x10
+jpeg_idct_11x11 webrtc_jpeg_idct_11x11
+jpeg_idct_12x12 webrtc_jpeg_idct_12x12
+jpeg_idct_13x13 webrtc_jpeg_idct_13x13
+jpeg_idct_14x14 webrtc_jpeg_idct_14x14
+jpeg_idct_15x15 webrtc_jpeg_idct_15x15
+jpeg_idct_16x16 webrtc_jpeg_idct_16x16
