@@ -7,7 +7,7 @@ const files = ninjaSrc.match(/^build obj\/libwebrtc\.a: alink ([^\n]*)$/m)[1].sp
 const aFiles = ['libwebrtc_obj.a'].concat(files.filter(file => /\.a$/.test(file)));
 
 console.log(`create libwebrtc.a
-${files.map(file => `addlib ${aFiles}`).join('\n')}
+${aFiles.map(file => 'addlib ' + file).join('\n')}
 save
 end
 `);
