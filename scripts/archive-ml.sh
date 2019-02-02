@@ -11,3 +11,5 @@ node ./gen-libwebrtc-mri.js >libwebrtc.mri
 "$MLSDK/tools/toolchains/bin/aarch64-linux-android-ar" -M <libwebrtc.mri
 
 "$MLSDK/tools/toolchains/bin/aarch64-linux-android-objcopy" --redefine-sym isqrt32=webrtc_isqrt32 --redefine-sym silk_insertion_sort_increasing=webrtc_silk_insertion_sort_increasing --redefine-sym silk_insertion_sort_increasing_all_values_int16=webrtc_silk_insertion_sort_increasing_all_values_int16 libwebrtc.a
+
+# ar t libwebrtc.a >extract.sh; gawk -i inplace '{print "echo " $s " && ar x libwebrtc.a " $s " && ar d libwebrtc.a " $s " && mv " $s " obj" NR ".o"}' extract.sh; chmod +x extract.sh; ./extract.sh; rm libwebrtc.a; /tmp/android-ndk-r19/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android-ar crs libwebrtc.a obj*.o; /tmp/android-ndk-r19/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android-objcopy --redefine-sym isqrt32=webrtc_isqrt32 --redefine-sym silk_insertion_sort_increasing=webrtc_silk_insertion_sort_increasing --redefine-sym silk_insertion_sort_increasing_all_values_int16=webrtc_silk_insertion_sort_increasing_all_values_int16 libwebrtc.a
