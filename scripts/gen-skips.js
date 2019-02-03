@@ -8,7 +8,7 @@ const index = {};
 let first = true;
 for (let i = 0; i < ls.length; i++) {
   const l = ls[i];
-  const match = l.match(/\(([0-9]+).+?\.o\): In/);
+  const match = l.match(/\(([0-9]+).+?\.o\): In function/);
   if (match && !index[match[1]]) {
     if (first) {
       first = false;
