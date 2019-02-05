@@ -11,11 +11,13 @@
 #ifndef RTC_BASE_BYTEORDER_H_
 #define RTC_BASE_BYTEORDER_H_
 
+#include <stdint.h>
+
 #if defined(WEBRTC_POSIX) && !defined(__native_client__)
 #include <arpa/inet.h>
 #endif
 
-#include "rtc_base/basictypes.h"
+#include "rtc_base/system/arch.h"
 
 #if defined(WEBRTC_MAC)
 #include <libkern/OSByteOrder.h>
@@ -47,31 +49,11 @@
 #define be16toh(v) ntohs(v)
 #define be32toh(v) ntohl(v)
 #if defined(WEBRTC_WIN)
-#if __BIG_ENDIAN__
-  #define htonll(x)   (x)
-  #define ntohll(x)   (x)
-#else
-  #define htonll(x)   ((((uint64_t)htonl(x&0xFFFFFFFF)) << 32) + htonl(x >> 32))
-  #define ntohll(x)   ((((uint64_t)ntohl(x&0xFFFFFFFF)) << 32) + ntohl(x >> 32))
-#endif
-
-#ifndef le64toh
-#if __BYTE_ORDER == __LITTLE_ENDIAN
-  #define le64toh(x) (x)
-#else
-  #define le64toh(x) __bswap_64(x)
-#endif
-#endif
-
-#ifndef htole64
-  #define htole64 le64toh
-#endif
-
 #define htobe64(v) htonll(v)
 #define be64toh(v) ntohll(v)
 #endif
 
-#if defined(RTC_ARCH_CPU_LITTLE_ENDIAN)
+#if defined(WEBRTC_ARCH_LITTLE_ENDIAN)
 #define htole16(v) (v)
 #define htole32(v) (v)
 #define htole64(v) (v)
@@ -82,7 +64,7 @@
 #define htobe64(v) __builtin_bswap64(v)
 #define be64toh(v) __builtin_bswap64(v)
 #endif
-#elif defined(RTC_ARCH_CPU_BIG_ENDIAN)
+#elif defined(WEBRTC_ARCH_BIG_ENDIAN)
 #define htole16(v) __builtin_bswap16(v)
 #define htole32(v) __builtin_bswap32(v)
 #define htole64(v) __builtin_bswap64(v)
@@ -94,8 +76,8 @@
 #define be64toh(v) (v)
 #endif
 #else
-#error RTC_ARCH_CPU_BIG_ENDIAN or RTC_ARCH_CPU_LITTLE_ENDIAN must be defined.
-#endif  // defined(RTC_ARCH_CPU_LITTLE_ENDIAN)
+#error WEBRTC_ARCH_BIG_ENDIAN or WEBRTC_ARCH_LITTLE_ENDIAN must be defined.
+#endif  // defined(WEBRTC_ARCH_LITTLE_ENDIAN)
 #elif defined(WEBRTC_POSIX)
 #include <endian.h>
 #endif
@@ -162,7 +144,7 @@ inline uint64_t GetLE64(const void* memory) {
 
 // Check if the current host is big endian.
 inline bool IsHostBigEndian() {
-#if defined(RTC_ARCH_CPU_BIG_ENDIAN)
+#if defined(WEBRTC_ARCH_BIG_ENDIAN)
   return true;
 #else
   return false;
@@ -196,4 +178,3 @@ inline uint64_t NetworkToHost64(uint64_t n) {
 }  // namespace rtc
 
 #endif  // RTC_BASE_BYTEORDER_H_
-
