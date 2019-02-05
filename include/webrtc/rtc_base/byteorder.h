@@ -51,6 +51,13 @@
 #if defined(WEBRTC_WIN)
 #define htobe64(v) htonll(v)
 #define be64toh(v) ntohll(v)
+#if __BIG_ENDIAN__
+  #define htonll(x)   (x)
+  #define ntohll(x)   (x)
+#else
+  #define htonll(x)   ((((uint64_t)htonl(x&0xFFFFFFFF)) << 32) + htonl(x >> 32))
+  #define ntohll(x)   ((((uint64_t)ntohl(x&0xFFFFFFFF)) << 32) + ntohl(x >> 32))
+#endif
 #endif
 
 #if defined(WEBRTC_ARCH_LITTLE_ENDIAN)
