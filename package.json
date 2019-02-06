@@ -1,6 +1,6 @@
 {
   "name": "native-webrtc-deps",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "description": "Node native WebRTC dependencies",
   "main": "index.js",
   "directories": {
