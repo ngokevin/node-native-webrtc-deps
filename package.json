@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/modulesio/node-native-rtc-deps#readme",
   "dependencies": {
-    "unzip": "^0.1.11"
+    "unzip": "^0.1.11",
+    "unzip-stream": "^0.3.0"
   }
 }
